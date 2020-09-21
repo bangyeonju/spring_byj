@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	
+<bean id="hello" class="com.spring.ex4.Hello"/>
+<bean id="start" class="com.spring.ex4.Start"/>
+<bean id="end" class="com.spring.ex4.End"/>
+<bean id="bye" class="com.spring.ex4.Goodbye"/>
+
+<bean id="student" class="com.spring.ex4.StudentImpl">
+	<property name="name" value="조정석"/>
+	<property name="age" value="10"/>
+	<property name="gradeNum" value="3"/>
+	<property name="classNum" value="5"/>
+	
+</bean>
+
+<aop:config>
+	<aop:aspect ref="start" order="1">
+		<aop:before method="start"
+		pointcut="execution(* com.spring.ex4.Student*.*())"/>
+	</aop:aspect>
+</aop:config>
+
+<aop:config>
+	<aop:aspect ref="hello" order="2">
+		<aop:before method="hello"
+		pointcut="execution(* com.spring.ex4.Student*.*())"/>
+	</aop:aspect>
+</aop:config>
+<aop:config>
+	<aop:aspect ref="end" order="1">
+		<aop:after method="end"
+		pointcut="execution(* com.spring.ex4.Student*.*())"/>
+	</aop:aspect>
+</aop:config>
+
+
+<bean id="worker" class="com.spring.ex4.WorkerImpl">
+	<property name="name" value ="윤아"/>
+	<property name="age" value ="20"/>
+	<property name="job" value ="개발자"/>
+</bean>
+
+<aop:config>
+	<aop:aspect ref="start" order="1">
+		<aop:before method="start"
+		pointcut="execution(* com.spring.ex4.Worker*.*())"/>
+	</aop:aspect>
+</aop:config>
+
+<aop:config>
+	<aop:aspect ref="bye" order="2">
+		<aop:after method="goodbye"
+		pointcut="execution(* com.spring.ex4.Worker*.*())"/>
+	</aop:aspect>
+</aop:config>
+<aop:config>
+	<aop:aspect ref="end" order="1">
+		<aop:after method="end"
+		pointcut="execution(* com.spring.ex4.Worker*.*())"/>
+	</aop:aspect>
+</aop:config>
+
+</beans>
+<!-- <bean id="h" class="com.spring.ex4.Hello"/>
+<bean id="stu" class="com.spring.ex4.StudentImpl"/>
+<bean id ="myworker" class="com.spring.ex4.WorkerImpl"/>
+
+
+<aop:config>
+	<aop:aspect ref="h">
+		<aop:before method="hello"
+		pointcut="execution(* com.spring.ex4.WorkerImpl.*())" />
+	</aop:aspect>
+</aop:config> -->

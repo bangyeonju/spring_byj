@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- //double radius=10.0;
+//		Point point = new PointImpl();
+//		
+//		point.setXpos(3.0);
+//		point.setYpos(4.0);
+//		
+//		Circle circle = new CircleImpl(radius, point);
+//		circle.display(); -->
+
+
+<!-- <bean id="point" class="com.spring.sample3.PointImpl">
+	<property name="xpos" >
+		<value>3.0</value>
+	</property>
+	
+	<property name="ypos" >
+		<value type="double">4.0</value>
+		
+	</property>
+	
+	
+</bean>
+
+<bean id="circle" class="com.spring.sample3.CircleImpl">
+	<constructor-arg>
+		<value type="double">10.0</value>
+	</constructor-arg>
+	
+	<constructor-arg>	
+		<ref bean="point"/>
+	</constructor-arg>
+</bean> -->
+
+<bean id="point" class="com.spring.sample3.PointImpl">
+	<property name="xpos">
+		<value>2.0</value>
+	</property>
+	<property name="ypos">
+		<value>4.0</value>
+	</property>
+</bean>
+<bean id="circle" class="com.spring.sample3.CircleImpl">
+		<constructor-arg>
+			<value>6.0</value>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="point"/>
+		</constructor-arg>
+</bean>
+</beans>

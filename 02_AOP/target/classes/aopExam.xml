@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+<!--  pointcut : 핵심기능.-->
+	<bean id="myorder" class="com.spring.ex2.OrderImpl"/>
+	<bean id="li" class="com.spring.ex2.Login"/>
+	<bean id="d" class="com.spring.ex2.Dao"/>
+	<bean id="lo" class="com.spring.ex2.Logout"/>
+	<bean id="h" class="com.spring.ex2.Hello"/>
+	<bean id="myboard" class="com.spring.ex2.BoardImpl"/>
+	
+	<aop:config>
+		<aop:aspect ref="li">
+			<aop:before method="login" pointcut="execution(* com.spring.ex2.OrderImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect ref="d" order="2">
+			<aop:after method="dao" 
+			pointcut="execution(* com.spring.ex2.OrderImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect ref="lo" order="1">
+			<aop:after method="logout"
+			pointcut="execution(* com.spring.ex2.OrderImpl.*())"
+			/>
+		</aop:aspect>
+	</aop:config>
+
+	
+	<aop:config>
+		<aop:aspect ref="li" order="1">
+			<aop:before method="login"
+			 pointcut="execution(* com.spring.ex2.BoardImpl.*())"/>
+		</aop:aspect>
+	</aop:config>	
+	<aop:config>
+		<aop:aspect ref="h" order="2">
+			<aop:before method="hello"
+			pointcut="execution(* com.spring.ex2.BoardImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config >
+		<aop:aspect ref="d" order="3">
+			<aop:before method="dao"
+			pointcut="execution(* com.spring.ex2.BoardImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+	<aop:config>
+		<aop:aspect ref="lo">
+			<aop:after method="logout"
+			pointcut="execution(* com.spring.ex2.BoardImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+</beans> 
+<!-- 
+after order 에서는 큰숫자가 먼저 실행된다.
+before order에서는 작은숫자가 먼저실행된다. 
+
+execution(리턴타입 com.spring.ex.BoarderImpl.*())
+
+<aop:config> aop설정을 하겠다.	
+aop:aspect 공통사항(로그인,로그아웃,DB작업)
+pointcut:핵심사항
+advice :before after
+joinpoint : aspect 적용가능한 지점들의 모음.
+ -->

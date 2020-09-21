@@ -1,0 +1,8 @@
+pom.xml에 아래 코드 작성해야한다.
+<!-- AOP설정 -->
+		<dependency>	
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
+		</dependency>  
+		 
