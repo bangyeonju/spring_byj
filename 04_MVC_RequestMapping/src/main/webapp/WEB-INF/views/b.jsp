@@ -1,0 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+/web-inf/views/b 입니다<br>
+
+/WEB=INF아래에 있는 JSP는 따로실행시킬수없다...
+Controller...
