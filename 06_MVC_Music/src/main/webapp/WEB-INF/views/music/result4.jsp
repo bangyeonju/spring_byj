@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 result4.jsp<br>
 title :${mb.title}<br>
-singer :${mb.singer}<br>
+singer :${mb.getSinger()}<br>
 price :${mb.price}<br>

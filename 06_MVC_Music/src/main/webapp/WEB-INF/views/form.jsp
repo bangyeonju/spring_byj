@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form action="input3" method="get">
+<form action="input4" method="get">
 	<table border="1">
 		<tr>
 			<td>제목</td>
