@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- album.xml(mapper)  -->
+<!-- parameterType="별칭" -->
+<mapper namespace="album.AlbumBean">
+	<insert id="InsertAlbum" parameterType="MyAlbum">
+		insert into albums(num,title,singer,price,day)
+		values(albums_seq.nextval,#{title},#{singer},#{price},default)
+	</insert>
+	<select id="GetAlbumList" resultType="MyAlbum">
+		select * from albums
+		order by num asc
+		
+	</select>
+	<delete id="DeleteAlbum">
+		delete from albums
+		 where num=#{num}
+	</delete>
+<select id="SelectOneAlbum" resultType="MyAlbum">	
+ select * from albums where num=#{num}
+</select>
+<update id="UpdateAlbum" parameterType="MyAlbum">
+	update albums set title=#{title}, singer=#{singer}, price=#{price} ,day=#{day}
+	where num=#{num} 
+</update>
+</mapper>

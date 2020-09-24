@@ -11,12 +11,13 @@ list.jsp<br>
 	<th>이름</th>
 	<th>나이</th>
 </tr>
-<c:forEach items="p" var="${lists}">
+<c:forEach items="${lists}" var="dto">
 	<tr>	
-		<td>${p.num }</td>
-		<td>${p.id }</td>
-		<td>${p.name }</td>
-		<td>${p.age }</td>
+		<td>${dto.num }</td>
+		<td><a href="delete?num=${dto.num}">${dto.id }</a></td>
+		<td><a href="content_view?num=${dto.num}">${dto.name }</a></td>
+		<td>${dto.age }</td>
 	</tr>
 </c:forEach>
 </table>
+<a href="write_view">삽입</a>
