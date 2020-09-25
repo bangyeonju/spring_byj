@@ -9,11 +9,32 @@
 		insert into albums(num,title,singer,price,day)
 		values(albums_seq.nextval,#{title},#{singer},#{price},default)
 	</insert>
+	
 	<select id="GetAlbumList" resultType="MyAlbum">
 		select * from albums
+		<if test="whatColumn == 'title'">
+			where title like #{keyword}
+		</if> 
+		<if test="whatColumn == 'singer'">
+			where singer like #{keyword}
+		</if> 
+		<if test="whatColumn == 'all'">
+			where title like #{keyword} or singer like #{keyword}
+		</if> 
 		order by num asc
-		
 	</select>
+	
+	<!-- 
+	whatColumn : title
+	keyword : 날
+	select * from albums
+	where title like %'날%' 
+	order by num asc;
+	
+	select * from albums
+	where singer like '%아%';
+	
+	 -->
 	<delete id="DeleteAlbum">
 		delete from albums
 		 where num=#{num}
@@ -21,8 +42,18 @@
 <select id="SelectOneAlbum" resultType="MyAlbum">	
  select * from albums where num=#{num}
 </select>
-<update id="UpdateAlbum" parameterType="MyAlbum">
-	update albums set title=#{title}, singer=#{singer}, price=#{price} ,day=#{day}
+<update id="UpdateAlbum">
+	update albums set title=#{title}, singer=#{singer}, price=#{price}
 	where num=#{num} 
 </update>
+<select id="GetTotalCount" resultType="int">
+	select count(*)
+	from albums
+</select>
 </mapper>
+<!-- insert,update,delete에서는 정수리턴한다 쓰고시픈데 /insert,delete에는 resultType이없다.
+	select는 resultType꼭써야한다.
+	어떤 쿼리문이든 parameterType은  써두대구 안써두 댄당.
+	<select id="GetTotalCount" resultType="int"> return type이 ...?int?
+	
+	  -->

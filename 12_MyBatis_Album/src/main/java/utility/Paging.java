@@ -181,8 +181,8 @@ public class Paging {
 			int totalCount,
 			String url, 
 			String whatColumn, 
-			String keyword,
-			String whologin) {		
+			String keyword
+			) {		
 
 		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
 			System.out.println("_pageNumber:"+_pageNumber); // null
