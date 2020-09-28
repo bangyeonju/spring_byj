@@ -4,15 +4,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 AlbumList.jsp
 <script type="text/javascript">
-   function goUpdate(num){//${album.num}을 num변수로 받음
+   function goUpdate(num,pageNumber,pageSize){//${album.num}을 num변수로 받음
 	  //alert(1);
    		//alert(num);
-      location.href="update.ab?num="+num;
+      location.href="update.ab?num="+num+"&pageNumber="+pageNumber+"&pageSize="+pageSize;
    
    }
 </script>
 <!-- form안에 있는것는 다 넘어간다. -->
-<h2>앨범 리스트 화면</h2>
+<h2>앨범 리스트 화면(레코드갯수:${totalCount})</h2>
 <form action="list.ab" method="get">
 	<select name="whatColumn">
 		<option value="all">전체검색</option>
@@ -23,7 +23,7 @@ AlbumList.jsp
 	<input type="submit" value="검색"/>
 	
 </form>
-${fn:length(lists)}
+
 <table border="1">
 	<tr>
 			<th>번호</th>
@@ -41,10 +41,13 @@ ${fn:length(lists)}
 		<td>${album.singer }</td>
 		<td>${album.price }</td>
 		<td>${album.day }</td>
-		<td><a href="delete.ab?num=${album.num}">삭제</a></td>
-		<td><input type="button" value="수정" onClick="goUpdate('${album.num}')"/></td>
+		<td><a href="delete.ab?num=${album.num}&pageNumber=${pageInfo.pageNumber}">삭제</a></td>
+		<td><input type="button" value="수정" onClick="goUpdate('${album.num}','${pageInfo.pageNumber}','${pageInfo.pageSize}')"/></td>
 
 	</tr>
 	</c:forEach>
 </table>
+
+<br>
+${pageInfo.pagingHtml }<br>
 <a href="insert.ab">삽입</a>

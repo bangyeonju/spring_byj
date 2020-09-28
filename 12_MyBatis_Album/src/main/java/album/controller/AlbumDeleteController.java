@@ -13,17 +13,16 @@ public class AlbumDeleteController {
 	final String command= "delete.ab";
 	final String gotoPage="redirect:/list.ab";
 	@Autowired
-	AlbumDao albumdao;
+	private AlbumDao albumdao;
 	
 	@RequestMapping(value=command)
-	public ModelAndView doAction(@RequestParam("num") int num) {
+	public String doAction(@RequestParam("num") int num,
+								@RequestParam("pageNumber") int pageNumber
+								) {
 		System.out.println("1");
-		int cnt = albumdao.deleteAlbum(num);
+	albumdao.deleteAlbum(num);
 		
-		System.out.println(cnt);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(gotoPage);
-		return mav;
+		return gotoPage+"?pageNumber="+pageNumber;
 				
 		
 	}

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 AlbumUpdateForm.jsp
+${pageNumber }/${pageSize }
 <style type="text/css">
 .err{
 font-size: 11px;
@@ -12,6 +13,8 @@ font-weight: bold;
 <h1>앨범추가</h1>
 <form:form commandName="album" action="update.ab" method="post">
 	<input type="hidden" name="num" value="${album.num}"/>
+	<input type="hidden" name="pageNumber" value="${pageNumber}"/>
+	<input type="hidden" name="pageSize" value="${pageSize}"/>
 	<p>
 		<label>노래제목</label>
 		<input type="text" name="title" value="${album.title}"/>

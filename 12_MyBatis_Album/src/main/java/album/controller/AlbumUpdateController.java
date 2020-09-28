@@ -25,26 +25,38 @@ public class AlbumUpdateController {
 	
 	//model방식으로 넘기는 방법.!
 	@RequestMapping(value=command, method = RequestMethod.GET)
-	public String doAction(@RequestParam int num,Model model) {
-		System.out.println(num);
+	public String doAction(@RequestParam("num") int num,
+						   @RequestParam("pageNumber") int pageNumber,
+						   @RequestParam("pageSize") int pageSize,
+							Model model
+			) {
+		System.out.println("num:"+num);
 		AlbumBean album = albumdao.selectOneAlbum(num);
 		model.addAttribute("album",album);
+		model.addAttribute("pageNumber",pageNumber);
+		model.addAttribute("pageSize",pageSize);
 		return getPage;
 	}
 	@RequestMapping(value=command,method = RequestMethod.POST)
-	public ModelAndView update(@ModelAttribute("album")@Valid AlbumBean album,
+	public ModelAndView update(	@RequestParam("pageNumber") int pageNumber,
+								@RequestParam("pageSize") int pageSize,
+								@ModelAttribute("album")@Valid AlbumBean album,
 								BindingResult result) {
 		System.out.println("update()");
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) { //유효성검사에서  
+			mav.addObject("pageNumber",pageNumber);
+			mav.addObject("pageSize",pageSize);
 			mav.setViewName(getPage); //updateForm으로
+			
 			return mav;
 		}
 		
 		int cnt =albumdao.updateAlbum(album);
 		
 		if(cnt>0) { //성공적으로 업데이트 되면 list호출 
-				mav.setViewName(gotoPage); 
+				mav.setViewName(gotoPage+"?pageNumber="+pageNumber+"&pageSize="+pageSize); 
+				//"redirect:/list.ab?pageNumber"+pageNumber+"&pageSize="+pageSize; 요러케가야한다.
 		}else {//업데이트 실패하면 UpdateForm으로
 			mav.setViewName(getPage);//
 		}

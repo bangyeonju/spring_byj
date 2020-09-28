@@ -208,7 +208,7 @@ public class Paging {
 			this.pageNumber = this.totalPage ;
 		}
 		
-		this.offset = ( pageNumber - 1 ) * pageSize ; 
+		this.offset = ( pageNumber - 1 ) * pageSize ; //17페이지를 눌렀을떄 =>32개데이터를 띄고(건너뛰고)? //건너 뛸 레코드수? 1 0/2 2/3 4/
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}

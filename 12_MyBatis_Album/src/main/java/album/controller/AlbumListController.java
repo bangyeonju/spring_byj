@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +33,8 @@ public class AlbumListController {
 								@RequestParam(value="keyword",required=false) String keyword,
 								@RequestParam(value="pageNumber",required=false) String pageNumber,
 								@RequestParam(value="pageSize",required=false) String pageSize,
-								HttpServletRequest request) {
+								HttpServletRequest request,Model model) {
+		
 		System.out.println("whatcolumn:"+whatColumn);
 		System.out.println("keyword:"+keyword);
 		System.out.println("pageNumber:"+pageNumber);
@@ -42,13 +44,13 @@ public class AlbumListController {
 		map.put("whatColumn", whatColumn);//whatColumn=title
 		map.put("keyword", "%"+keyword+"%");//keyword=날
 		
-		int totalCount = albumDao.getTotalCount();
+		int totalCount = albumDao.getTotalCount(map);
 		System.out.println("totalCount:"+totalCount);
 		
 		
 		String url = request.getContextPath() +"/"+command ;
 		System.out.println("url:"+url);
-		Paging pageInfo = new Paging(pageNumber,pageSize,totalCount,url,whatColumn,keyword);
+		Paging pageInfo = new Paging(pageNumber,pageSize,totalCount,url,whatColumn,keyword); //pageIngo는 Paging객체 관리자 입니다.
 		
 		System.out.println("offset:"+pageInfo.getOffset());
 		System.out.println("limit : "+pageInfo.getLimit());
@@ -57,12 +59,11 @@ public class AlbumListController {
 		
 		
 		
-		
-		
-		
 		List<AlbumBean> lists = albumDao.getAlbumList(pageInfo,map);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("lists",lists);
+		mav.addObject("pageInfo",pageInfo);
+		model.addAttribute("totalCount",totalCount);
 		mav.setViewName(getPage);
 		return mav;
 	}

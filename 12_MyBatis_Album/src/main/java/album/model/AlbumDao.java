@@ -46,8 +46,8 @@ public class AlbumDao {
 		int cnt = sqlSessionTemplate.update("album.AlbumBean.UpdateAlbum",album);
 		return cnt;
 	}
-	public int getTotalCount() {
-		int cnt = sqlSessionTemplate.selectOne("album.AlbumBean.GetTotalCount");
+	public int getTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne("album.AlbumBean.GetTotalCount",map);
 		return cnt;
 	}
 }
