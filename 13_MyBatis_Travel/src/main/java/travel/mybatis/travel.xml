@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="travel.TravelBean">
+
+	<insert id="InsertTravel">
+		insert into travel values(travel_seq.nextval,#{name},#{age},#{area},#{style},#{price})
+	</insert>
+	
+	<select id="SelectTravel" resultType="MyTravel">
+		select * from travel
+		
+		<if test="searchColumn == 'all'">
+			 where area like #{searchWord} or style like #{searchWord}
+		</if>
+		<if test="searchColumn == 'area'">
+			 where area like #{searchWord}
+		</if>
+		<if test="searchColumn == 'style'">
+			 where style like #{searchWord}
+		</if>
+		
+		order by num asc
+	</select>
+	
+	<select id="GetOneTravel" resultType="MyTravel">
+		select * from travel
+		where num=#{num}
+	</select>
+	
+	<update id="UpdateTravel">
+		update travel set name=#{name}, age=#{age}, area=#{area}, style=#{style}, price=#{price}
+		where num=#{num}
+	</update>
+	
+	<delete id="DeleteTravel">
+		delete travel 
+		where num=#{num}
+	</delete>
+
+
+</mapper>

@@ -1,35 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>여행 등록 화면</title>
+<%@ include file="common.jsp" %>
+
 <style type="text/css">
 	.err{
-	font-size: 9pt;
-	color: red;
-	font-weight: bold;
+		font-size : 9px;
+		color : red;
+		font-weight : bold;
 	}
+
 </style>
-</head>
-<body>
-<!-- .tv요청
-travel.controller 패키지
-travel.model 패키지
-travel.mybatis패키지  -->
-web-inf\travel\TravelInsertForm.jsp<br>
-<form:form commandName="travela"  method="post"  action="insert.tv">
+
+TravelInsertForm.jsp<br>
+<title>여행 등록 화면</title>
+
+<form:form commandName="travelBean"  method="post"  action="insert.tv">
 	<h1><span>여행 정보 등록 화면</span></h1>
 	<p>
 		<label for="name">이름</label>
-		<input type="text" name="name" id="name" value="${travela.name }">
-		<form:errors cssClass="err" path="name"></form:errors>
+		<input type="text" name="name" id="name" value="">
+		<form:errors cssClass="err" path="name"/>
 	</p>
 
 	<p>
 		<label for="age">나이</label>
-		<input type="text" name="age" id="age" value="${travela.age }">
-		<form:errors cssClass="err" path="age"></form:errors>
+		<input type="text" name="age" id="age" value="">
+		<form:errors cssClass="err" path="age"/>
 	</p>
 	<p>
 		<label for="area">관심지역</label>
@@ -38,7 +34,7 @@ web-inf\travel\TravelInsertForm.jsp<br>
 		<input type="checkbox" name="area" id="area" value="동남아">동남아
 		<input type="checkbox" name="area" id="area" value="일본">일본
 		<input type="checkbox" name="area" id="area" value="중국">중국
-		<form:errors cssClass="err" path="area"></form:errors>
+		<form:errors cssClass="err" path="area"/>
 	</p>
 	
 	<p>
@@ -47,7 +43,7 @@ web-inf\travel\TravelInsertForm.jsp<br>
 		<input type="radio" name="style" id="style" value="크루즈">크루즈
 		<input type="radio" name="style" id="style" value="자유여행">자유여행
 		<input type="radio" name="style" id="style" value="골프여행">골프여행
-		<form:errors cssClass="err" path="style"></form:errors>
+		<form:errors cssClass="err" path="style"/>
 	</p>
 	
 	 <p>
@@ -65,5 +61,10 @@ web-inf\travel\TravelInsertForm.jsp<br>
 			<input type="submit" value="추가하기" id="btnSubmit">		
 		</p>
 </form:form>
-</body>
-</html>
+
+<!-- 
+이름 : 입력하세요
+나이 : 10~100살
+관심지역 하나하도 선택
+여행타입,가격: 원하는 거 선택해주세요
+ -->
