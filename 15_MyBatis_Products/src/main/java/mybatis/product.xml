@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product.model.Product">
+
+<select id="GetTotalCount" resultType="int">
+	select count(*) from products
+	<if test="whatColumn=='name'">
+		where name like #{keyword}
+	</if>
+	<if test="whatColumn=='contens'">
+		where contens like #{keyword}
+	</if>
+	order by num asc
+</select>
+<!-- resultType="product.model.Product"도 쓸수있다. => SqlMapConfig.xml에 product.model.Product 별칭지정되어있다.! -->
+<select id="GetDataList" resultType="MyProduct">
+	select * from products
+	<if test="whatColumn=='name'">
+		where name like #{keyword}
+	</if>
+	<if test="whatColumn=='contents'">
+		where contents like #{keyword}
+	</if>
+	order by num desc
+</select>
+
+<insert id="InsertData">
+	insert into products(num, name, company, image, stock, price,  contents, point, inputdate)
+	 			values(seqprod.nextval,#{name},#{company},#{image},#{stock},#{price},#{contents},#{point},#{inputdate})
+								
+</insert>
+<select id="GetOneData" resultType="MyProduct">
+	select * from products
+	where num = #{num}
+</select>
+<update id="UpdateData">
+	update products set name=#{name},company=#{company},price=#{price},stock=#{stock},point=#{point},contents=#{contents},image=#{image},inputdate=#{inputdate}
+	where num= #{num}
+</update>
+<delete id="DeleteData">
+	delete from products
+	where num =#{num}
+</delete>
+
+<update id="UpdateStock">
+		update products set stock = stock-#{stock} 
+		where num =#{num}
+	</update>
+</mapper>
+
