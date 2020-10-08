@@ -144,7 +144,7 @@ create table orders(
 drop sequence seqodid;
 create sequence seqodid start with 1 increment by 1 nocache ;
 
--- oid : 주문번호,  pnum : 상품 번호,  qty : 주문 수량
+-- oid : 주문번호(송장번호),  pnum : 상품 번호,  qty : 주문 수량
 drop table orderdetails purge ;
 
 create table orderdetails(

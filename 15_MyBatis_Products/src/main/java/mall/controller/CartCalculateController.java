@@ -1,4 +1,4 @@
-package mall.cart;
+package mall.controller;
 
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import mall.cart.MyCartList;
 import member.model.Member;
 import member.model.MemberDao;
 import order.model.OrderDao;
@@ -51,8 +52,10 @@ public class CartCalculateController {
 			// oid:주문번호,pnum:상품번호,qty:주문수량
 			
 			OrderDetail odBean = new OrderDetail();
+			
 			odBean.setOid(maxOid);
 			odBean.setPnum(pnum);
+			
 			odBean.setQty(qty);
 			
 			orderDetailDao.insertData(odBean);

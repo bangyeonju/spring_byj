@@ -116,6 +116,13 @@ public class Member {
 	public void setMpoint(int mpoint) {
 		this.mpoint = mpoint;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", name=" + name + ", password=" + password + ", salary=" + salary + ", hiredate="
+				+ hiredate + ", gender=" + gender + ", hobby=" + hobby + ", job=" + job + ", zipcode=" + zipcode
+				+ ", address1=" + address1 + ", address2=" + address2 + ", mpoint=" + mpoint + "]";
+	}
 	
 	
 }

@@ -9,3 +9,4 @@
 
 <a href="<%=viewProduct%>">상품목록보기</a> <br><br><br>
 <a href="<%=viewOrder%>">나의 주문 내역</a> <br><br><br>
+session.getAttribute("loginInfo") : <%= session.getAttribute("loginInfo") %>
